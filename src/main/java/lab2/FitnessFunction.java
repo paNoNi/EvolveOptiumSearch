@@ -13,8 +13,18 @@ public class FitnessFunction implements FitnessEvaluator<double[]> {
     }
 
     private int dimension;
+    private int limit = 1000000;
+    private double best_result = 0.0;
 
     public double getFitness(double[] solution, List<? extends double[]> list) {
+        // check for limit
+        if (limit == 0) {
+            System.out.println("Number of fitness evaluations is exceeded!");
+            System.out.println("___Your final best result = " + best_result + "!___");
+            System.exit(0);
+        }
+        limit--;
+        // start evaluations
         int n = dimension;
         double pi = Math.PI;
         double dn = 1.0 / n;
@@ -36,8 +46,12 @@ public class FitnessFunction implements FitnessEvaluator<double[]> {
         result = result + a;
         result = Math.abs(result);
 
+        if (best_result < result) {
+            best_result = result;
+        }
         return result;
     }
+
 
     public boolean isNatural() {
         return true;
