@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class MyFactory extends AbstractCandidateFactory<double[]> {
 
-    private int dimension;
+    private final int dimension;
 
     public MyFactory(int dimension) {
         this.dimension = dimension;
@@ -14,9 +14,9 @@ public class MyFactory extends AbstractCandidateFactory<double[]> {
 
     public double[] generateRandomCandidate(Random random) {
         double[] solution = new double[dimension];
-        // x from -5.0 to 5.0
-
-        // your implementation:
+        Random rd = new Random();
+        for (int i = 0; i < solution.length; i++)
+            solution[i] = rd.nextDouble() % 5;
 
         return solution;
     }

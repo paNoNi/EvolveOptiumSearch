@@ -6,13 +6,22 @@ import java.util.List;
 import java.util.Random;
 
 public class MyMutation implements EvolutionaryOperator<double[]> {
+
     public List<double[]> apply(List<double[]> population, Random random) {
-        // initial population
-        // need to change individuals, but not their number!
+        int instDim = population.get(0).length;
+        for (int i = 0; i < population.size(); i++) {
+            int randomPoint = random.nextInt(instDim);
+            double randomStep = random.nextDouble() * 5.0 - 2.5;
+            double newValue = population.get(i)[randomPoint];
+            if (newValue + randomStep > 5.0 | newValue + randomStep < -5.0) {
+                randomStep = -randomStep;
+            }
+            newValue += randomStep;
 
-        // your implementation:
-
-        //result population
+            double[] instance = population.get(i);
+            instance[randomPoint] = newValue;
+            population.set(i, instance);
+        }
         return population;
     }
 }
